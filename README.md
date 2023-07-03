@@ -37,9 +37,7 @@
 <h3 align="center">ChatGPT-Langchain-ChatBot</h3>
 
   <p align="center">
-    The chatgpt-langchain chatbot is a SaaS (Software as a Service) architecture deployed on Amazon Web Services (AWS). It leverages the capabilities of OpenAI's powerful language model, GPT-4, and combines it with AWS services to create a seamless and efficient chatbot solution.
-
-The project involves several components that interact to process natural language queries, search a talent pool, and respond to user requests. These components include AWS Lambda functions, OpenSearch, S3, SQS, and a chatbot app deployed on AWS Fargate.
+    Simple SaaS chatbot solution using ChatGPT, Langchain and AWS
     <br />
     <a href="https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot"><strong>Explore the docs »</strong></a>
     <br />
@@ -87,7 +85,9 @@ The project involves several components that interact to process natural languag
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `ShaneYuTH`, `hirebeat-chatgpt-langchain-chatbot`, `twitter_handle`, `yutianhao`, `gmail`, `shaneyu0704`, `ChatGPT-Langchain-ChatBot`, `project_description`
+The chatgpt-langchain chatbot is a SaaS (Software as a Service) architecture deployed on Amazon Web Services (AWS). It leverages the capabilities of OpenAI's powerful language model, GPT-4, LangChain's amazing framework, and combines it with AWS services to create a seamless and efficient chatbot solution.
+
+The project involves several components that interact to process natural language queries, search a talent pool, and respond to user requests. These components include AWS Lambda functions, OpenSearch, S3, SQS, and a chatbot app deployed on AWS Fargate.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -95,14 +95,15 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Built With
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+ 
+* [![AWS Lambda][Lambda]][Lambda-url]
+* [![AWS Fargate][Fargate]][Fargate-url]
+* [![AWS S3][S3]][S3-url]
+* [![AWS SQS][SQS]][SQS-url]
+* [![OpenSearch][OpenSearch.org]][OpenSearch-url]
+* [![Langchain][Langchain.com]][Langchain-url]
+* [![OpenAI][OpenAI.com]][OpenAI-url]
+* [![Flask][Flask.com]][Flask-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -197,7 +198,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - shaneyu0704@gmail.com
+Tianhao Yu - [LinkedIn](https://www.linkedin.com/in/yutianhao/) - shaneyu0704@gmail.com
 
 Project Link: [https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot](https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot)
 
@@ -208,9 +209,10 @@ Project Link: [https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot](
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [Langchain](https://python.langchain.com/docs/get_started/introduction.html)
+* [OpenAI](https://platform.openai.com/)
+* [FAISS](https://github.com/facebookresearch/faiss)
+* [AWS](https://aws.amazon.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -231,19 +233,19 @@ Project Link: [https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot](
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/yutianhao
 [product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+[Lambda]: https://img.shields.io/static/v1?style=for-the-badge&message=AWS+Lambda&color=222222&logo=AWS+Lambda&logoColor=FF9900&label=
+[Lambda-url]: https://aws.amazon.com/lambda/ 
+[Fargate]: https://img.shields.io/static/v1?style=for-the-badge&message=AWS+Fargate&color=222222&logo=AWS+Fargate&logoColor=FF9900&label=
+[Fargate-url]: https://aws.amazon.com/fargate/
+[S3]: https://img.shields.io/static/v1?style=for-the-badge&message=Amazon+S3&color=569A31&logo=Amazon+S3&logoColor=FFFFFF&label=
+[S3-url]: https://aws.amazon.com/s3/
+[SQS]: https://img.shields.io/static/v1?style=for-the-badge&message=Amazon+SQS&color=FF4F8B&logo=Amazon+SQS&logoColor=FFFFFF&label=
+[SQS-url]: https://aws.amazon.com/sqs/
+[OpenSearch.org]: https://img.shields.io/static/v1?style=for-the-badge&message=OpenSearch&color=005EB8&logo=OpenSearch&logoColor=FFFFFF&label=
+[OpenSearch-url]: https://opensearch.org/
+[OpenAI.com]: https://img.shields.io/static/v1?style=for-the-badge&message=OpenAI&color=412991&logo=OpenAI&logoColor=FFFFFF&label=
+[OpenAI-url]: https://openai.com/
+[Flask.com]: https://img.shields.io/static/v1?style=for-the-badge&message=Flask&color=000000&logo=Flask&logoColor=FFFFFF&label=
+[Flask-url]: https://flask.palletsprojects.com/en/2.3.x/
+[Langchain.com]: https://img.shields.io/static/v1?style=for-the-badge&message=Langchain&color=000000&logo=Langchain&logoColor=FFFFFF&label=
+[Langchain-url]: https://python.langchain.com/docs/get_started/introduction.html
