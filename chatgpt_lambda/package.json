@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.1404.0",
+    "openai": "^3.3.0"
+  }
+}
