@@ -27,13 +27,6 @@
 
 
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
 <h3 align="center">ChatGPT-Langchain-ChatBot</h3>
 
   <p align="center">
@@ -42,8 +35,6 @@
     <a href="https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot">View Demo</a>
-    ·
     <a href="https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot/issues">Report Bug</a>
     ·
     <a href="https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot/issues">Request Feature</a>
@@ -83,7 +74,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Flowchart][product-flowchart]](https://example.com)
 
 The chatgpt-langchain chatbot is a SaaS (Software as a Service) architecture deployed on Amazon Web Services (AWS). It leverages the capabilities of OpenAI's powerful language model, GPT-4, LangChain's amazing framework, and combines it with AWS services to create a seamless and efficient chatbot solution.
 
@@ -146,7 +137,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Use this space to show useful examples of how a project can be used. Additional flowcharts, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -232,7 +223,7 @@ Project Link: [https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot](
 [license-url]: https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/yutianhao
-[product-screenshot]: images/screenshot.png
+[product-flowchart]: images/chatgpt-lambda-chatbot.jpeg
 [Lambda]: https://img.shields.io/static/v1?style=for-the-badge&message=AWS+Lambda&color=222222&logo=AWS+Lambda&logoColor=FF9900&label=
 [Lambda-url]: https://aws.amazon.com/lambda/ 
 [Fargate]: https://img.shields.io/static/v1?style=for-the-badge&message=AWS+Fargate&color=222222&logo=AWS+Fargate&logoColor=FF9900&label=
