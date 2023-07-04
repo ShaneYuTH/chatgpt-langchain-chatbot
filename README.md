@@ -63,7 +63,13 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <ul>
+        <li><a href="#user-interaction">User Interaction</a></li>
+        <li><a href="#keyword-extraction">Keyword Extraction</a></li>
+        <li><a href="#target-search">Target Search</a></li>
+        <li><a href="#data-processing">Data Processing</a></li>
+        <li><a href="#response-generation">Response Generation</a></li>
+      </ul>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -190,7 +196,7 @@ A user interacts with the chatbot, asking a question like, "I am looking for a P
 ### Keyword Extraction
 The chatbot sends this query to a Lambda function which uses the OpenAI API to extract keywords from the question. In this case, the keywords might be "Python developer", "machine learning experience", and "tech industry".
 
-### Talent Search
+### Target Search
 The extracted keywords are then sent to another Lambda function. This function uses key words to construct a query that searched in a talent pool in AWS OpenSearch for profiles that match these keywords. The results are stored in an S3 bucket as .json file.
 
 ### Data Processing
