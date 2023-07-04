@@ -57,7 +57,9 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#setting-up-openai-api">Setting Up OpenAI API</a></li>
+        <li><a href="#setting-up-aws">Setting Up AWS</a></li>
+        <li><a href="#setting-up-each-component">Setting Up Each Component</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -103,32 +105,74 @@ The project involves several components that interact to process natural languag
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This section will guide you on how to get started with the ChatGPT-LangChain chatbot application.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+* OpenAI Account: You will need to have an [OpenAI](https://platform.openai.com/) account to use the OpenAI API.
 
-### Installation
+* AWS Account: You will also need an [AWS](https://aws.amazon.com/) account as the application is deployed on AWS services.
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot.git
-   ```
-3. Install NPM packages
+* Python: The application is written in Python. Make sure to have Python 3.7 or higher installed.
+
+* Node.js: The lambda function is written in Node.js/JavaScript. Make sure to have Node.js 18.x or higher installed.
+
+* Docker: [Docker](https://www.docker.com/) image is required for fargate to deploy the script and chatbot application.
+
+### Setting Up OpenAI API
+1. Visit the OpenAI official website and create an account if you don't have one already.
+2. Once you're logged in, go to the API section.
+3. Generate a new API key. Save this key in a secure place as you will need it for the application.
+
+### Setting Up AWS
+1. If you don't have an AWS account already, visit the official AWS website and create a new account.
+2. Once you're logged in, go to the Identity and Access Management (IAM) console and create a new user.
+3. Assign the necessary permissions to the user to access the required AWS services (Lambda, OpenSearch, S3, SQS, Fargate).
+4. Once the user is created, you will be provided with an Access Key ID and Secret Access Key. Save these in a secure place as you will need them for the application.
+
+
+### Setting Up Each Component
+
+#### Lambda Function - OpenAI API
+1. In the AWS console, go to the Lambda service.
+2. Click on "Create function".
+3. Give your function a name, select the Node.js 18.x runtime, and assign the appropriate execution role.
+4. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+5. Save the chatgpt_lambda as a zip file and upload to the function you just created.
+6. In the Environment Variables section, enter your OpenAI API key.
+7. For the execution role, make sure it has the proper permission to talk to AWS Lambda.
+8. Save your function.
+
+#### Lambda Function - OpenSearch
+1. Follow the same steps as above to create another Lambda function and upload the opensearch_lambda to your function.
+2. Create an S3 bucket for storing retrieved results. Enable SQS for S3 that listens to every new file written.
+3. In the Environment Variables section, enter your [OpenSearch](https://aws.amazon.com/opensearch-service/) Credentials and S3 bucket URL. Please note, while this code can function with other databases, adjustments will be necessary within the connection and query section to ensure proper data retrieval.
+4. For the execution role, make sure it has the proper permission to talk to AWS S3.
+5. Save your function.
+
+#### ECR/ECS(Fargate) - Python Script
+1. Navigate to langchain_s3_script folder and build docker image.
+2. Follow the ECR (Amazon Elastic Container Registry) guide to create a repository and upload the image.
+3. Follow the ECS (Amazon Elastic Container Service) guide to create a ECS cluster and a task definition with the image. Remember to use Fargate as underlying infrastructure.
+4. In the task definition, set the environment variables for AWS Access Key ID, Secret Access Key, OpenAI API Key, and any other necessary variables.
+5. Make sure the task role has proper permission to write to AWS S3.
+4. Run the Fargate task.
+
+#### ECR/ECS(Fargate) - Flask App Chatbot
+1. Follow the same steps above to create another image and upload it to a new repo under ECR.
+2. Create a new task definition with the image. Remember to use Fargate as underlying infrastructure. We will use the same cluster to deploy the flask app.
+3. In the task definition, set the environment variables for AWS Access Key ID, Secret Access Key, and any other necessary variables.
+5. Make sure the task role has proper permission to read from AWS S3.
+6. Run the Fargate task.
+
+After setting up each component, the ChatGPT-LangChain chatbot application should be up and running. You can now interact with the chatbot through the Flask app's exposed endpoint(task's exposed IP:8000).
+
+Remember to periodically monitor and maintain your AWS services to ensure the smooth operation of your application.
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -137,23 +181,25 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional flowcharts, code examples and demos work well in this space. You may also link to more resources.
+This chatbot is built around the concept of people search, aiming to match user queries with potential talent or resources from your database. Its SaaS architecture and cloud deployment make it easily scalable and accessible from anywhere. With necessary modifications, it can be adapted to work with any other type of database or use case.
+Below is a step-by-step example usage of the chatbot:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+### User Interaction
+A user interacts with the chatbot, asking a question like, "I am looking for a Python developer with machine learning experience working in the tech industry".
+   
+### Keyword Extraction
+The chatbot sends this query to a Lambda function which uses the OpenAI API to extract keywords from the question. In this case, the keywords might be "Python developer", "machine learning experience", and "tech industry".
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Talent Search
+The extracted keywords are then sent to another Lambda function. This function uses key words to construct a query that searched in a talent pool in AWS OpenSearch for profiles that match these keywords. The results are stored in an S3 bucket as .json file.
 
+### Data Processing
+A message with the information about the newly stored results is sent to an SQS queue. A Python script running on Fargate listens to this queue. When it detects the new message, it retrieves the results from the S3 bucket, processes them into a Langchain chain object, and pickles it for storage.
 
+### Response Generation
+When the user asks for the search results, the Flask chatbot app retrieves the pickled Langchain object from the user's folder in the S3 bucket. It unpickles the object and uses the chain to generate a response, which would be a list of potential candidates that match the user's query. 
 
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot/issues) for a full list of proposed features (and known issues).
+One powerful feature of the Langchain chain object is its ability to support follow-up questions. Users can continue the conversation and ask more detailed questions about the search results. The chatbot will leverage the stored Langchain chain object to provide relevant answers without needing to repeat the earlier steps. This saves time and computational resources, while providing a seamless conversational experience.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
