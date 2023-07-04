@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  s3langchainlambdatest:
+    image: s3langchainlambdatest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
