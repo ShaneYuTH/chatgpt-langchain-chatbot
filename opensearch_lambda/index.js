@@ -1,3 +1,4 @@
+// Import the necessary libraries and modules
 const AWS = require("aws-sdk");
 const { client, indexName } = require("./config");
 const { clean } = require("./utils");
@@ -5,10 +6,9 @@ const { clean } = require("./utils");
 // Create a new S3 instance
 const s3 = new AWS.S3();
 
-// Exported AWS Lambda function
+// Main function for handling incoming AWS Lambda events
 exports.handler = async (event) => {
-  // Extract user id
-  // console.log("Event here: " + JSON.stringify(event));
+  // Extract user id and check if it exists
   const userId = event.user_id;
   if (!userId) {
     return {
@@ -16,7 +16,7 @@ exports.handler = async (event) => {
       body: { message: "Missing User ID" },
     };
   }
-
+  // Extract the body from the incoming event
   const bodyData = JSON.parse(event.body);
   console.log("Body here: " + JSON.stringify(bodyData));
   const result = bodyData.choices[0].text
@@ -24,10 +24,11 @@ exports.handler = async (event) => {
     .filter((line) => Boolean(line) && !line.includes("Desired Output"))
     .map((line) => line.replace(/[\{\}\"]+/g, ""));
 
-  console.log("Text here: " + result);
+  // console.log("Text here: " + result);
 
   const values = {};
 
+  // Parse the text from the body and create a query
   result.forEach((item) => {
     if (item.trim() !== "") {
       const [key, value] = item.split(":").map((str) => str.trim());
@@ -47,7 +48,7 @@ exports.handler = async (event) => {
     }
   });
 
-  console.log("Values here: " + JSON.stringify(values));
+  // console.log("Values here: " + JSON.stringify(values));
 
   const query = {
     bool: {
@@ -131,8 +132,10 @@ exports.handler = async (event) => {
     },
   });
 
+  // Remove all unnecessary fields from the response
   const cleanBody = clean(body);
 
+  // Upload the response to S3
   const params = {
     Bucket: process.env.S3_BUCKET,
     Key: `search-results-clean/${userId}/${userId}.json`,
@@ -140,6 +143,7 @@ exports.handler = async (event) => {
     ContentType: "application/json",
   };
 
+  // Return the response
   try {
     const s3Response = await s3.upload(params).promise();
     console.log(`File uploaded successfully at ${s3Response.Location}`);

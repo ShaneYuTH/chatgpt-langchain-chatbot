@@ -11,5 +11,5 @@ module.exports.client = new Client({
     "Content-Type": "application/json",
   },
 });
-
+// Changed to your index name
 module.exports.indexName = "talent_sourcing_v3";

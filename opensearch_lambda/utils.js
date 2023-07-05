@@ -1,4 +1,5 @@
 function clean(obj) {
+  // Remove all null, undefined, empty string, and empty array values from an object
   for (let propName in obj) {
     if (
       obj[propName] === null ||
