@@ -1,15 +1,17 @@
+// Import the necessary libraries and modules
 const AWS = require("aws-sdk");
 const { Configuration, OpenAIApi } = require("openai");
 const { prompt } = require("./prompt");
 
+// Configuration
 const configuration = new Configuration({
-  // organization: procss.env.OPENAI_ORGANIZATION_ID,
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
 const lambda = new AWS.Lambda();
 
+// Main function for handling incoming events
 exports.handler = async (event) => {
   const user_input = event.user_input;
   const user_id = event.user_id;
@@ -22,6 +24,7 @@ exports.handler = async (event) => {
   }
 
   try {
+    // Create a completion using the OpenAI API
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: prompt + user_input,
@@ -32,6 +35,7 @@ exports.handler = async (event) => {
       presence_penalty: 0.0,
     });
 
+    // Prepare the payload for the Lambda invocation
     const payload = {
       FunctionName: "peoplesearch-lambda-test",
       InvocationType: "RequestResponse",
@@ -42,6 +46,7 @@ exports.handler = async (event) => {
       }),
     };
 
+    // Invoke the downstream Lambda function and await the result
     const result = await lambda.invoke(payload).promise();
     const resultPayload = JSON.parse(result.Payload);
     return resultPayload;
