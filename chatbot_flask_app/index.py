@@ -1,11 +1,12 @@
 # Import necessary libraries and modules
 import boto3
-from flask import Flask, request, session
 import os
 import pickle
 import logging
 import atexit
+from flask import Flask, request, session
 from flask_session import Session
+from flask_cors import CORS, cross_origin
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import timedelta
 
@@ -16,6 +17,8 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
 Session(app)
 
+# Set up CORS
+CORS(app, supports_credentials=True)
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -60,6 +63,7 @@ def download_file_from_s3(bucket, key, filename):
 
 # Define endpoint for chatting
 @app.route('/chat', methods=['POST'])
+@cross_origin()
 def chat():
     try:
         # Get user_id and question from request data
@@ -98,6 +102,7 @@ def chat():
 
 # Define endpoint for ending a chat
 @app.route('/end_chat', methods=['POST'])
+@cross_origin()
 def end_chat():
     try:
         # Get user_id from request data
@@ -122,6 +127,7 @@ def end_chat():
 
 # Define endpoint for health check
 @app.route('/health', methods=['GET'])
+@cross_origin()
 def health_check():
     return ({'status': 'healthy'}), 200
 
