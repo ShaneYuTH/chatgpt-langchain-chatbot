@@ -243,7 +243,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Tianhao Yu - [LinkedIn](https://www.linkedin.com/in/yutianhao/) - shaneyu0704@gmail.com
 
-Project Link: [https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot](https://github.com/ShaneYuTH/hirebeat-chatgpt-langchain-chatbot)
+Project Link: [https://github.com/ShaneYuTH/chatgpt-langchain-chatbot](https://github.com/ShaneYuTH/chatgpt-langchain-chatbot)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
